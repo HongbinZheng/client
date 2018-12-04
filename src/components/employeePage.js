@@ -152,7 +152,7 @@ class EmployeePage extends Component {
                 <button className="btn btn-info btn-sm" style={{ marginLeft: 40, marginTop: 5, boxShadow: '0 10px 20px -8px rgba(0, 0, 0,.7)' }} onClick={this.handleLogOut}>Log out</button>
 
                 <Popup trigger={<button style={{ boxShadow: '0 10px 20px -8px rgba(0, 0, 0,.7)', marginLeft: 50, marginTop: 5 }}
-                    className="btn btn-info btn-sm">Apply for Holiday</button>} modal
+                    className="btn btn-info btn-sm">Request Holiday</button>} modal
                     contentStyle={{ width: "200px", height: "200px" }}>
                     <ApplyForVaction userID={this.state.userID} />
                 </Popup><br />

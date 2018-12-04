@@ -104,7 +104,7 @@ render(){
             border:"2px solid #c2c2c2"
           }} >
               <div style={greeting}>
-                  <h2 style={{margin:'1rem 2rem',borderBottom:"1px solid red"}}>A Company</h2>
+                  <h2 style={{margin:'1rem 2rem',borderBottom:"1px solid red"}}>Team ThreeTwoOne</h2>
                   <h5>Log in with your email address and password</h5>
               </div>
             <form

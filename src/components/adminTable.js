@@ -148,7 +148,7 @@ class AdminTable extends Component {
                                     <TableCell>
                                     </TableCell>
                                     : null}
-                                <TableCell>Employee Name</TableCell>
+                                <TableCell>Employee</TableCell>
                                 <TableCell numeric>Employee ID</TableCell>
                                 <TableCell >Hired Date</TableCell>
                                 <TableCell>Department</TableCell>
