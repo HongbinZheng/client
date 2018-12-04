@@ -27,7 +27,12 @@ const styles = theme => ({
   
   ////////////switch with state when backend ready
 
-
+  let axiosConfig = {
+    headers: {
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+    }
+  };
   const today = new Date()
 
 class AdminTable extends Component {
@@ -47,12 +52,12 @@ class AdminTable extends Component {
         if(!this.Auth.loggedIn()){
             this.props.history.push('/')
         }else{
-            axios.get('/api/getTable')
+            axios.get('https://cors-anywhere.herokuapp.com/https://oneseventytwo-payroll.herokuapp.com/api/getTable',axiosConfig)
                     .then(res=>{
            console.log(res.data.value)
            this.setState({info: res.data.value})
        })
-           axios.get('/api/getTimeOffTable')
+           axios.get('https://cors-anywhere.herokuapp.com/https://oneseventytwo-payroll.herokuapp.com/api/getTimeOffTable',axiosConfig)
                 .then(res=>{
                     console.log(res.data.value)
                     this.setState({timeoff:res.data.value})
@@ -70,7 +75,7 @@ class AdminTable extends Component {
    }
 
    deleteUser(id){
-       axios.delete('/api/delete',{data: {id: id}})
+       axios.delete('https://cors-anywhere.herokuapp.com/https://oneseventytwo-payroll.herokuapp.com/api/delete',{data: {id: id}},axiosConfig)
             .then(res=> {
                 console.log(res.data)
                 window.location.reload()
@@ -86,7 +91,7 @@ class AdminTable extends Component {
             tiemStatus:1,
             timeoffID:id
         }
-        axios.post('/api/acceptrequest',{info})
+        axios.post('https://cors-anywhere.herokuapp.com/https://oneseventytwo-payroll.herokuapp.com/api/acceptrequest',{info},axiosConfig)
             .then(res=>{
                 console.log(res.data)
                this.state.timeoff[index].timeStatus = 1
@@ -98,7 +103,7 @@ class AdminTable extends Component {
         tiemStatus:0,
         timeoffID:id
     }
-    axios.post('/api/rejectrequest',{info})
+    axios.post('https://cors-anywhere.herokuapp.com/https://oneseventytwo-payroll.herokuapp.com/api/rejectrequest',{info},axiosConfig)
         .then(res=>{
             console.log(res.data)
             this.state.timeoff[index].timeStatus = 0
@@ -131,11 +136,11 @@ class AdminTable extends Component {
                 <ul className="nav nav-tabs" id="myTab" role="tablist">
                     <li className="nav-item">
                         <a className="nav-link active" id="home-tab" data-toggle="tab" href="#employeeTable" role="tab"
-                            aria-controls="employeeTable" aria-selected="true">EmployeeTable</a>
+                            aria-controls="employeeTable" aria-selected="true">Employees</a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" id="profile-tab" data-toggle="tab" href="#vacationTable" role="tab"
-                            aria-controls="vacationTable" aria-selected="false">VacationTable</a>
+                            aria-controls="vacationTable" aria-selected="false">TimeOff</a>
                     </li>
                 </ul>
                 <div className="tab-content" id="myTabContent">
@@ -189,7 +194,7 @@ class AdminTable extends Component {
                                 <TableCell>Employee ID</TableCell>
                                 <TableCell>StartDate</TableCell>
                                 <TableCell>EndDate</TableCell>
-                                <TableCell>timeStatus</TableCell>
+                                <TableCell>Status</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>

@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 
+let axiosConfig = {
+    headers: {
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+    }
+  };
+
+
 class Tweet extends Component {
     constructor(){
         super()
@@ -17,7 +25,7 @@ class Tweet extends Component {
 
     handleOnClick(){
         var text = this.state.text;
-        axios.post('/api/twitter',{text})
+        axios.post('https://cors-anywhere.herokuapp.com/https://oneseventytwo-payroll.herokuapp.com/api/twitter',{text},axiosConfig)
         .then(res => {
             console.log(res.data)
             if(res.data === 200){

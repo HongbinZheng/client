@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 
+let axiosConfig = {
+    headers: {
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+    }
+  };
 
 class ApplyForVaction extends Component {
     constructor(props){
@@ -25,7 +31,7 @@ class ApplyForVaction extends Component {
             endDate: this.state.endDate,
             userID:this.state.userID
         }
-        axios.post('/api/requesttimeoff',{info})
+        axios.post('https://cors-anywhere.herokuapp.com/https://oneseventytwo-payroll.herokuapp.com/api/requesttimeoff',{info},axiosConfig)
             .then(res=>{
                 console.log(res.data)
                 if(res.data.http_code === 200){

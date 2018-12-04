@@ -43,7 +43,13 @@ class Login extends Component {
             email : this.state.email,
             password : this.state.password
         }
-        axios.post('/api/login',{user})
+        let axiosConfig = {
+          headers: {
+              'Content-Type': 'application/json',
+              "Access-Control-Allow-Origin": "*",
+          }
+        };
+        axios.post('https://cors-anywhere.herokuapp.com/https://oneseventytwo-payroll.herokuapp.com/api/login',{user}, axiosConfig)
             .then(res =>{
                 console.log(res.data)
                 if(res.data.http_code === 200)

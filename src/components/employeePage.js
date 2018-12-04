@@ -22,6 +22,12 @@ const styles = theme => ({
     },
   });
   
+  let axiosConfig = {
+    headers: {
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+    }
+  };
 
 const checkoutPanel = { background: '#FFFFFF', padding: '1rem', "borderRadius": "25px", border: '4px solid #c2c2c2', maxWidth: '70rem', marginLeft: "30px", marginBottom: "30px" }
 
@@ -48,7 +54,7 @@ class EmployeePage extends Component {
         else{
         const userID = this.props.location.state.info.userID
         this.setState(this.props.location.state.info)
-        Axios.get('/api/oneUserTimeOff',{params:{userID}})
+        Axios.get('https://cors-anywhere.herokuapp.com/https://oneseventytwo-payroll.herokuapp.com/api/oneUserTimeOff',{params:{userID}},axiosConfig)
             .then(res=>{
                 console.log(res.data)
                 this.setState({timeoff:res.data.value})
@@ -72,7 +78,7 @@ class EmployeePage extends Component {
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" id="profile-tab" data-toggle="tab" href="#vacationTable" role="tab"
-                            aria-controls="vacationTable" aria-selected="false">Vacation History</a>
+                            aria-controls="vacationTable" aria-selected="false">TimeOff History</a>
                     </li>
                 </ul>
                 <div className="tab-content" id="myTabContent">
@@ -127,7 +133,7 @@ class EmployeePage extends Component {
                                 <TableCell>Employee ID</TableCell>
                                 <TableCell>StartDate</TableCell>
                                 <TableCell>EndDate</TableCell>
-                                <TableCell>timeStatus</TableCell>
+                                <TableCell>Status</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -152,7 +158,7 @@ class EmployeePage extends Component {
                 <button className="btn btn-info btn-sm" style={{ marginLeft: 40, marginTop: 5, boxShadow: '0 10px 20px -8px rgba(0, 0, 0,.7)' }} onClick={this.handleLogOut}>Log out</button>
 
                 <Popup trigger={<button style={{ boxShadow: '0 10px 20px -8px rgba(0, 0, 0,.7)', marginLeft: 50, marginTop: 5 }}
-                    className="btn btn-info btn-sm">Request Holiday</button>} modal
+                    className="btn btn-info btn-sm">Request TimeOff</button>} modal
                     contentStyle={{ width: "200px", height: "200px" }}>
                     <ApplyForVaction userID={this.state.userID} />
                 </Popup><br />

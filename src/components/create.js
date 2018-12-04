@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+
+let axiosConfig = {
+    headers: {
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+    }
+  };
+
 class Create extends Component {
 
     constructor(props) {
@@ -35,7 +43,7 @@ class Create extends Component {
         admin:0,
         password:this.state.password
         }
-        axios.post(`/api/create`,{info})
+        axios.post(`https://cors-anywhere.herokuapp.com/https://oneseventytwo-payroll.herokuapp.com/api/create`,{info},axiosConfig)
             .then(res=>{   
                 console.log(res.data)
                 if(res.data.http_code === 200){
